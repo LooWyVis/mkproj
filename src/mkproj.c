@@ -4,6 +4,15 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+void gitInit() {
+    system("git init");
+        FILE *gitignore = fopen(".gitignore", "w");
+        if (gitignore) {
+            fprintf(gitignore, ".DS_Store");
+            fclose(gitignore);
+    }
+}
+
 void create_c_project(const char *project_name, int init_git) {
     printf("Création d'un projet C : %s\n", project_name);
     mkdir(project_name, 0755);
@@ -22,7 +31,7 @@ void create_c_project(const char *project_name, int init_git) {
     }
 
     if (init_git) {
-        system("git init");
+        gitInit();
     }
 }
 
@@ -38,11 +47,11 @@ void create_python_project(const char *project_name, int init_git) {
     }
 
     if (init_git) {
-        system("git init");
+        gitInit();
     }
 }
 
-void create_html_project(const char *project_name, int init_git) {
+void create_web_project(const char *project_name, int init_git) {
     printf("Création d'un projet Web : %s\n", project_name);
     mkdir(project_name, 0755);
     chdir(project_name);
@@ -63,14 +72,14 @@ void create_html_project(const char *project_name, int init_git) {
     }
 
     if (init_git) {
-        system("git init");
+        gitInit();
     }
 }
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         printf("Usage : mkproj [type] [nom_du_projet] [--git]\n");
-        printf("Types disponibles : c, python, html\n");
+        printf("Types disponibles : c, python, web\n");
         return 1;
     }
 
@@ -82,10 +91,10 @@ int main(int argc, char *argv[]) {
         create_c_project(project_name, init_git);
     } else if (strcmp(type, "python") == 0) {
         create_python_project(project_name, init_git);
-    } else if (strcmp(type, "html") == 0) {
-        create_html_project(project_name, init_git);
+    } else if (strcmp(type, "web") == 0) {
+        create_web_project(project_name, init_git);
     } else {
-        printf("Erreur : Type de projet inconnu. Utilisez c, python ou html.\n");
+        printf("Erreur : Type de projet inconnu. Utilisez c, python ou web.\n");
         return 1;
     }
 
