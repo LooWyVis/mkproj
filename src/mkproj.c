@@ -51,6 +51,28 @@ void create_python_project(const char *project_name, int init_git) {
     }
 }
 
+void create_cpp_project(const char *project_name, int init_git) {
+    printf("Création d'un projet C++ : %s\n", project_name);
+    mkdir(project_name, 0755);
+    chdir(project_name);
+
+    FILE *main_cpp = fopen("main.cpp", "w");
+    if (main_cpp) {
+        fprintf(main_cpp, "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, world!\" << std::endl;\n    return 0;\n}\n");
+        fclose(main_cpp);
+    }
+
+    FILE *makefile = fopen("Makefile", "w");
+    if (makefile) {
+        fprintf(makefile, "CXX=g++\nCXXFLAGS=-Wall -std=c++17\n\nall:\n\t$(CXX) main.cpp -o main $(CXXFLAGS)\n");
+        fclose(makefile);
+    }
+
+    if (init_git) {
+        gitInit();
+    }
+}
+
 void create_web_project(const char *project_name, int init_git) {
     printf("Création d'un projet Web : %s\n", project_name);
     mkdir(project_name, 0755);
@@ -79,7 +101,7 @@ void create_web_project(const char *project_name, int init_git) {
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         printf("Usage : mkproj [type] [nom_du_projet] [--git]\n");
-        printf("Types disponibles : c, python, web\n");
+        printf("Types disponibles : c, cpp, python, web\n");
         return 1;
     }
 
@@ -89,12 +111,14 @@ int main(int argc, char *argv[]) {
 
     if (strcmp(type, "c") == 0) {
         create_c_project(project_name, init_git);
+    } else if (strcmp(type, "cpp") == 0) {
+        create_cpp_project(project_name, init_git);
     } else if (strcmp(type, "python") == 0) {
         create_python_project(project_name, init_git);
     } else if (strcmp(type, "web") == 0) {
         create_web_project(project_name, init_git);
     } else {
-        printf("Erreur : Type de projet inconnu. Utilisez c, python ou web.\n");
+        printf("Erreur : Type de projet inconnu. Utilisez c, cpp, python ou web.\n");
         return 1;
     }
 
