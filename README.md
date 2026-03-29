@@ -1,7 +1,7 @@
 # mkproj - Générateur de projets
 
 ## Description
-`mkproj` est une commande permettant de créer rapidement un projet en C, Python ou HTML avec une structure de base. Il offre également une option pour initialiser un dépôt Git.
+`mkproj` est une commande permettant de créer rapidement un projet en C, C++, Python, Web ou LaTeX avec une structure de base. Il offre également une option pour initialiser un dépôt Git.
 
 ## Installation
 ### 1. Compiler le programme
@@ -34,6 +34,14 @@ Cela crée un dossier `MonProjetC` avec :
 - Un fichier `main.c` avec un programme de base
 - Un `Makefile`
 
+#### Créer un projet C++
+```sh
+mkproj cpp MonProjetCPP
+```
+Cela crée un dossier `MonProjetCPP` avec :
+- Un fichier `main.cpp`
+- Un `Makefile`
+
 #### Créer un projet Python avec Git
 ```sh
 mkproj python MonScript --git
@@ -42,14 +50,22 @@ Cela crée un dossier `MonScript` avec :
 - Un fichier `main.py`
 - Un dépôt Git initialisé
 
-#### Créer un projet HTML
+#### Créer un projet Web
 ```sh
-mkproj html SiteWeb
+mkproj web SiteWeb
 ```
 Cela crée un dossier `SiteWeb` avec :
 - Un fichier `index.html`
 - Un dossier `css` avec `style.css`
 - Un dossier `js`
+
+#### Créer un projet LaTeX
+```sh
+mkproj latex MonSujet
+```
+Cela crée un dossier `MonSujet` avec :
+- Un fichier `sujet.tex` prérempli
+- Un dossier `images`
 
 ## Options
 - `--git` : Initialise un dépôt Git dans le projet.
@@ -58,8 +74,10 @@ Cela crée un dossier `SiteWeb` avec :
 | Type   | Contenu généré |
 |--------|---------------|
 | `c`    | `main.c`, `Makefile` |
+| `cpp`  | `main.cpp`, `Makefile` |
 | `python` | `main.py` |
-| `html`  | `index.html`, `css/style.css`, `js/` |
+| `web`  | `index.html`, `css/style.css`, `js/` |
+| `latex` | `sujet.tex`, `images/` |
 
 ## Licence
 Ce projet est sous licence MIT.
