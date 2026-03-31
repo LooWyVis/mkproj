@@ -108,12 +108,8 @@ void create_latex_project(const char *project_name, int init_git) {
     FILE *sujet_tex = fopen("sujet.tex", "w");
     if (sujet_tex) {
         fprintf(sujet_tex,
-                "\\documentclass[11pt]{exam}\n\n"
-                "\\usepackage[a4paper,margin={.1\\paperheight,.1\\paperwidth},marginratio=1:1]{geometry}\n"
-                "\\usepackage[french]{babel}\n"
-                "\\usepackage[T1]{fontenc}\n"
-                "\\usepackage{tikz}\n"
-                "\\usetikzlibrary{positioning,arrows.meta}\n\n"
+                "\\documentclass[11pt]{article}\n\n"
+                "\\usepackage[a4paper,margin=2.25cm]{geometry}\n"
                 "\\usepackage[cours,eleve]{profnsi}\n"
                 "\\profnsisetup{\n"
                 "\tniveau=Première,\n"
@@ -123,7 +119,7 @@ void create_latex_project(const char *project_name, int init_git) {
                 "}\n\n"
                 "\\begin{document}\n"
                 "\t\\creerDoc\n\n"
-                "\\partie{Introduction}\n"
+                "\t\\partie{Introduction}\n"
                 "\t\n\n"
                 "\\end{document}\n");
         fclose(sujet_tex);
